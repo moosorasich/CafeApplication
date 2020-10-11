@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding='true'>
+  <div class = "card">
+    <h2 class="custom-font">ชำระเงิน</h2>
+  <div class = "item item-body">
+    <h4 class="custom-font">&nbsp;&nbsp;&nbsp;&nbsp;ชื่อลูกค้า: {{this.ShowName()}}  </h4>
+    <h4 class="custom-font">&nbsp;&nbsp;&nbsp;&nbsp;แต้มสะสม: {{this.ShowPoint()}} </h4>
+    <h4 class="custom-font">&nbsp;&nbsp;&nbsp;&nbsp;ราคา: {{this.Sumfinal}} บาท </h4>
+  </div>
+  <ion-item id="rounded">
+    <ion-label  class="custom-font" position="fixed">โค้ดส่วนลด</ion-label>
+    <ion-select class="form-control" #x (ionChange)="selectPromotion(x.value)">
+      <ion-select-option *ngFor="let item of promotions; index as i" [value]="i" >{{this.promotions[i].name}}</ion-select-option>
+    </ion-select>
+    <ion-button class="custom-font" color="dark" (click)="getCustomerTel()">ตกลง</ion-button>
+  </ion-item>
+  <br><br>
+  <div [innerHTML]="data" style="width: 300px; height: 300px; margin-left: auto; margin-right: auto;"></div>
+  <br><br>
+  <ion-button class="custom-font" expand="block" share='round' color="dark"  (click)="Pay()">ชำระเงิน</ion-button>
+
+</div>
+</ion-content>

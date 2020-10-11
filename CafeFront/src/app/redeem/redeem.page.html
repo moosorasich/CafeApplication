@@ -1,0 +1,35 @@
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300&display=swap" rel="stylesheet">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="custom-font">Redeem Point</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class = "card">
+      <h2 class="custom-font">โค้ดส่วนลด</h2>
+    <div class = "item item-body">
+      <img src="/assets/icon/hand.png" id="icon" alt="User Icon" />       
+      <h4 class="custom-font">&nbsp;&nbsp;&nbsp;&nbsp;ชื่อลูกค้า: {{this.ShowName()}} </h4>
+      <h4 class="custom-font">&nbsp;&nbsp;&nbsp;&nbsp;แต้มสะสม: {{this.ShowPoint()}} </h4>
+    </div>
+ </div>
+ <br><br>
+ <div *ngFor="let item of promotions; index as i" class="coupon">
+    <div class="container">
+      <h3 class="custom-font">Promotion Code</h3>
+    </div>
+    <div class="container" style="background-color:white">
+      <h2><b class="custom-font">{{item.discount}}% OFF YOUR PURCHASE</b></h2>
+      <p class="custom-font">ประเภทCode:{{item.type}}&nbsp;&nbsp;แต้มที่ใช้:{{item.point}}</p>
+    </div>
+    <div class="container">
+      <p class="custom-font">Use Promo Code: <span class="promo">{{item.name}}</span></p>
+      <p class="expire">Expires: Until changes the code</p>
+    </div>
+  </div>
+ <br><br>
+</ion-content>

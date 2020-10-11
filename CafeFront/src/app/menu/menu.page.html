@@ -1,0 +1,54 @@
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300&display=swap" rel="stylesheet">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="selectshop"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="custom-font">Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding='true'>
+  <ion-row>
+    <ion-card class="row" *ngFor="let item of menu; index as i">
+      <img [src]="item.img">
+      <ion-card-header>
+         <b class="custom-font">{{item.name}} ({{item.variation}})</b><br>
+         <b class="custom-font">ราคา: {{item.price}} บาท</b>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button class="custom-font" expand="block" color="dark" (click)="addMenu({name:item.name,id:item._id,type:item.type,price:item.price,variation:item.variation})">Order</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button (click)="All()">
+        <ion-icon name="cafe"></ion-icon>
+        <ion-label>เมนูทั้งหมด</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)="Snack()">
+        <ion-icon name="pizza"></ion-icon>
+        <ion-label>ขนม</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button (click)="Promotion()">
+        <ion-icon name="heart"></ion-icon>
+        <ion-label>โปรโมชั่น</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

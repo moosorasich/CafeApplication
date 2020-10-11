@@ -1,0 +1,68 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="custom-font">Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding='true'>
+  <div class="center">
+    <h1 class="custom-font">Create Account</h1>
+  </div>
+  <form [formGroup]="registrationForm" (ngSubmit)="signup()">
+    <div id="container">
+    <ion-list>
+        <ion-item id="rounded">
+            <ion-label class="custom-font" fixed position="stacked">Name</ion-label>
+            <ion-input autocapitalize inputmode="text" formControlName="name"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+          <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item id="rounded">
+            <ion-label class="custom-font" fixed position="stacked">Email</ion-label>
+            <ion-input inputmode="email" formControlName="email" placeholder="example@mail.com" ></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.email">
+          <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item id="rounded">
+            <ion-label class="custom-font" fixed position="stacked">Phone</ion-label>
+            <ion-input inputmode="phone" formControlName="phone"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.phone">
+          <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item id="rounded">
+            <ion-label class="custom-font" fixed position="stacked">Username</ion-label>
+            <ion-input inputmode="text" formControlName="username"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.username">
+          <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item id="rounded">
+            <ion-label class="custom-font" fixed position="stacked">Password</ion-label>
+            <ion-input inputmode type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <div *ngFor="let error of errorMessages.password">
+          <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+            <small class="error-message">{{error.message}}</small>
+          </ng-container>
+        </div>
+        <ion-item class="custom-font" lines='none'>
+            Already have an account? <a routerLink='/login'>Sign in.</a>
+        </ion-item>
+    </ion-list>
+    
+    <ion-button [disabled]="!registrationForm.valid" class="custom-font" expand="block" share='round' color="dark" (click)="signup()">Registration</ion-button>
+  </div>
+  </form>
+</ion-content>

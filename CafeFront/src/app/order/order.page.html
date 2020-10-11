@@ -1,0 +1,30 @@
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300&display=swap" rel="stylesheet">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="custom-font">Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <h1 class="custom-font">รายการของฉัน</h1>
+    <ion-card *ngFor="let item of selectMenu; index as i">
+      <ion-item>
+        <ion-label class="custom-font">{{item.name}} &nbsp;({{item.variation}})</ion-label>
+        <ion-button (click)="deletSelect(i)" fill="outline" slot="end">X</ion-button>
+      </ion-item>
+    </ion-card>
+
+    <br><br><br>
+    <p class="text-right titleWhite" style="margin-right: 20%" >
+      <b class="custom-font">&nbsp;&nbsp;&nbsp;&nbsp;ราคารวม: {{SumPrice(selectMenu)}} บาท </b>
+    </p>
+   
+    <ion-button class="custom-font" expand="block" share='round' color="dark"  (click)="openModal()">ยืนยัน</ion-button>
+    
+    
+  </div>
+</ion-content>

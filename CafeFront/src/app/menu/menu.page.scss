@@ -1,0 +1,28 @@
+
+ion-header{
+    --ion-background-color:#FFFFD8;
+}
+ion-content{
+
+    --ion-background-color:#FFFFCF;
+
+}
+ion-footer{
+    --ion-background-color:#FFFFD8;
+}
+.custom-font{
+    font-family: 'Kanit', sans-serif;
+    font-size: 35;
+}
+ion-card{
+    display: flex;
+    flex-direction: column;
+    width: 45% !important;
+    margin: 6px !important;
+    --ion-background-color:#FFFF;
+}
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}

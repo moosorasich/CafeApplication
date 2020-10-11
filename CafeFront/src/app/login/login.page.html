@@ -1,0 +1,36 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="custom-font">W e l c o m e</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding='true'>
+  <div>
+    <img src="/assets/icon/hand.png" id="icon" alt="User Icon" />
+  </div>
+  <br> 
+<form >
+  <div id="container">
+    <ion-list>
+        <ion-item id="rounded">
+          <ion-label class="custom-font" fixed position="stacked" >Username</ion-label>
+          <br>
+          <ion-input type='text' id="username" [(ngModel)]="username" name="username" placeholder="username"></ion-input>
+        </ion-item>
+
+        <ion-item id="rounded">
+          <ion-label class="custom-font" fixed position="stacked" >Password</ion-label>
+          <br>
+          <ion-input type='password' id="password" [(ngModel)]="password" name="login" placeholder="password"></ion-input>
+        </ion-item>
+
+        <ion-item lines='none'>
+          <a  class="custom-font" routerLink='/signup'>Create Account</a>
+        </ion-item>
+
+    </ion-list>
+      <ion-button class="custom-font" expand="block" share='round' color="dark" (click)="login()">Login</ion-button>
+  </div>
+</form>
+</ion-content>
