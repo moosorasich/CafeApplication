@@ -125,6 +125,21 @@ async function compareHash(Text,myHash) {
         console.log(err)
     })
  })
+ router.route('/getUser/:id').get(auth,(req,res) => {
+    const id = req.params.id
+    getUser(id).then( result => {
+        if (result) {
+            console.log(id,result)
+            res.status(200).json(result)
+        }
+        
+            
+        else
+            res.status(404).send({message : `Cannot find with ID  ${id}`})
+    }).catch( err => {
+        res.status(500).send({message: `Error: ${err}`})
+    })
+})
  router.route('/updateCustomer').put(auth,(req,res) => {
     const changepoint =  {
         point: req.body.point

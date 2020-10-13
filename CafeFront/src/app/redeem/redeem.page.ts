@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RedeemPage implements OnInit {
   name: string
-  points: number
+  points: any
   promotions:any
   shop: any
   promotionForm = new FormGroup({
@@ -57,6 +57,17 @@ export class RedeemPage implements OnInit {
     return this.cs.getName()
   }
   ShowPoint() {
+    try {
+      this.cs.getPoint().subscribe(
+        data => {
+          this.points = data;
+      },
+        err => {
+          console.log(err)
+        });
+    } catch (error) {
+        console.log(error)
+    }
     this.points = this.cs.getPoint();
     return this.cs.getPoint()
   }

@@ -29,7 +29,7 @@ export class PaymodalComponent implements OnInit {
   Sumfinal: number
   customer: any
   customerId: any
-  customerPoint: number = 0
+  customerPoint: any = 0
   customerTelUse: any
   promotionName: String
   promotionDiscount: number = 0
@@ -146,9 +146,18 @@ export class PaymodalComponent implements OnInit {
     return this.cs.getName()
   }
   ShowPoint() {
-    this.customerPoint = this.cs.getPoint();
-
-    return this.cs.getPoint()
+    try {
+      this.cs.getPoint().subscribe(
+        data => {
+          this.customerPoint = data;
+      },
+        err => {
+          console.log(err)
+        });
+    } catch (error) {
+        console.log(error)
+    }
+    
   }
   getCustomerTel() {
     this.name = ''
@@ -160,9 +169,9 @@ export class PaymodalComponent implements OnInit {
     qrtel = qrtel + this.promptpay.substr(0, 3) + "-"
     qrtel = qrtel + this.promptpay.substr(3, 3) + "-"
     qrtel = qrtel + this.promptpay.substr(6, 4)
-    this.customerPoint = 0
+  
     this.customerId = this.cs.getID()
-    this.customerPoint = this.cs.getPoint()
+ 
     console.log(this.customerPoint)
       console.log(this.customerId)
       Sumex = Sumall - (Sumall * (Discount / 100))
@@ -177,7 +186,6 @@ export class PaymodalComponent implements OnInit {
     this.getQRcode(qrtel, Sumex)
   }
   Pay() {
-    console.log("this menu " + this.selectMenu + "this order" + this.OrderSelect + "This shop" + this.shop)
     if (!this.selectMenu.length) {
       return alert('Payment form is not valid')
     }

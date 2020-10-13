@@ -16,7 +16,7 @@ export class CustomerService {
   email: string
   phone: string
   name: string
-  point: number
+  point: any
   isLoggedin: boolean = true
   URL = 'http://localhost:3000/'
   constructor(private http: HttpClient, private local: LocalStorageService) {
@@ -33,6 +33,19 @@ export class CustomerService {
         this.user = data
 
         return this.user
+      }
+      else{
+        return false
+      }
+     
+    }))
+  }
+  getUser(id){
+    const headers = {'authorization': this.local.get('user').token}
+    return this.http.get<any>(`http://localhost:3000/customer/getUser/`+id,{headers}).pipe(map( data => {
+      if (data) {
+        console.log("hello",data)
+        return data.point
       }
       else{
         return false
@@ -97,6 +110,9 @@ export class CustomerService {
     return this.name
   }
   getPoint() {
+    var newpoint = this.getUser(this.Id)
+    this.point = newpoint
+    console.log(newpoint)
     return this.point
   }
 }

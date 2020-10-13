@@ -1,5 +1,7 @@
 var expressFunction = require('express')
-var queues = 1
+var y = 1
+var x = 'M'
+var queues = 1+x
 const router = expressFunction.Router()
 const mongoose = require('mongoose')
 const auth = require('../Auth')
@@ -15,7 +17,7 @@ const orderSchema = schema({
     promotion:String,
     shop:String,
     done: Boolean,
-    queue: Number
+    queue: String
 
 },{
     collection: 'orders'
@@ -96,13 +98,15 @@ function addOrder(orderDetails){
             queue: queues
 
         })
-        new_user.save((err,data) => {
+        new_user.save((err, data) => {
+            var x = 'M'
             if(err){
                 rej(new Error('Cannot insert order to DB'))
             }
             else{
-                res({message: 'Add order successfully'})
-                queues+=1
+                res({ message: 'Add order successfully' })
+                y += 1
+                queues = y+x
             }
         })
     })
