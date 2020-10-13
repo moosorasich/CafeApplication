@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit ,OnChanges} from '@angular/core'
 import { Router } from '@angular/router'
 import { MenuController, ModalController } from '@ionic/angular'
 import { MenuService } from '../services/menu.service'
@@ -24,6 +24,7 @@ export class PaymodalComponent implements OnInit {
   selectMenu: any[] = []
   shop: String
   promptpay: any
+  customerPhoneNumber: string
   Sum: number = 0
   Sumfinal: number
   customer: any
@@ -43,7 +44,6 @@ export class PaymodalComponent implements OnInit {
     id: ['', [Validators.required]],
     promotion: ['ไม่ได้ใช้โปรโมชั่น', []],
     paymentMethod: ['', [Validators.required]],
-    customerPhoneNumber: ['', [Validators.pattern('[0-9]{10}')]],
   })
   promotionForm = this.formBuilder.group({
     name: ['', [Validators.required]],
@@ -79,10 +79,12 @@ export class PaymodalComponent implements OnInit {
       data.forEach(index => { this.promotions.push(index) })
       console.log(this.promotions)
     })
+    this.ShowPoint()
+    this.ShowPhone()
   }
-
+  
   ngOnInit() {
-    
+    this.ShowPoint();
     console.log(this.so.getMenu())
     this.selectMenu = this.so.getMenu()
     this.SumPrice(this.selectMenu)
@@ -135,6 +137,10 @@ export class PaymodalComponent implements OnInit {
     }
     return sumPrice
   }
+  ShowPhone() {
+    this.customerPhoneNumber = this.cs.getPhone()
+    return this.cs.getPhone()
+  }
   ShowName() {
     this.name = this.cs.getName();
     return this.cs.getName()
@@ -172,7 +178,7 @@ export class PaymodalComponent implements OnInit {
   }
   Pay() {
     console.log("this menu " + this.selectMenu + "this order" + this.OrderSelect + "This shop" + this.shop)
-    if (!this.selectMenu) {
+    if (!this.selectMenu.length) {
       return alert('Payment form is not valid')
     }
     if(this.customerPoint<this.promotionPoint){
@@ -182,16 +188,15 @@ export class PaymodalComponent implements OnInit {
     const payload = {
       menu: this.selectMenu,
       id: this.orderForm.get('id').value,
-      //totalPrice: this.SumPrice(this.selectMenu),
       paymentStatus: true,
       paymentDate: new Date(),
       paymentMethod: 'โอนเงิน',
-      //quantity:this.selectMenu.length,
-      //customerPhoneNumber:this.cs.getPhone(),
+      quantity:this.selectMenu.length,
+      customerPhoneNumber:this.customerPhoneNumber,
       shop: this.shop,
-      customerPhoneNumber: this.orderForm.get('customerPhoneNumber').value,
       promotion: this.orderForm.get('promotion').value,
-      totalPrice: this.Sumfinal
+      totalPrice: this.Sumfinal,
+      done:false
     }
     console.log(payload)
     this.os.addOrder(payload).subscribe(data => {
@@ -208,18 +213,18 @@ export class PaymodalComponent implements OnInit {
     console.log(changepoint)
     this.cs.updateCustomer(changepoint).subscribe(data => {
 
-      this.reset()
     }, err => {
       console.log('Point is failed to update.\n Err:', err)
     })
   }
-  reset() {
-    this.orderForm.reset()
-  }
+  reset(index) {
+      this.selectMenu.splice(index)
+      console.log(this.selectMenu)
+  }  
 
   dismissModal() {
     this.modalCtrl.dismiss();
-    location.reload();
+    this.reset(this.selectMenu)
   }
 
 }
